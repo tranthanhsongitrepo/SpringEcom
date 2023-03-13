@@ -1,0 +1,47 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{%  block content %}
+    <section class="shoping-cart-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="wishlist-table-area table-responsive">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-remove">ID</th>
+										<th class="product-image">Khuyến mãi</th>
+										<th class="product-name">Trạng thái</th>
+										<th class="product-unit-price">Tổng tiền</th>
+										<th class="product-quantity">Trạng thái ship</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for order_log in page_obj %}
+									<tr>
+										<td>
+											<a href="{% url 'order-details-view' order_log.id %}">{{ order_log.order.id }}</a>
+										</td>
+										<td>
+											<p>{{ order_log.item.product.image }}</p>
+										</td>
+										<td class="product-name">
+											<h3>{{ order_log.order.sale_off }}</h3>
+										</td>
+										<td class="product-unit-price">
+											<p>{{ order_log.order_status }}</p>
+										</td>
+										<td class="product-quantity product-cart-details">
+                                            <p>{{ order_log.order.payment }}</p>
+										</td>
+									</tr>
+                                {% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock %}

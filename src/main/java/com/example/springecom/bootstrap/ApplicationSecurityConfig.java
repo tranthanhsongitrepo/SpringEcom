@@ -3,21 +3,15 @@ package com.example.springecom.bootstrap;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+
 import java.util.Arrays;
 
 @Configuration
@@ -25,8 +19,8 @@ import java.util.Arrays;
 public class ApplicationSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.
-                authorizeHttpRequests().
+        http
+                .authorizeHttpRequests().
                     requestMatchers("/css/**").permitAll().
                     requestMatchers("/web/**").permitAll().
                     requestMatchers("/api/v1/user/register").permitAll().
@@ -44,7 +38,7 @@ public class ApplicationSecurityConfig {
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .and()
-                .csrf()
+                .csrf().disable()
         ;
 
         return http.build();

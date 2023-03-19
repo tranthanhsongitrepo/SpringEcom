@@ -1,4 +1,11 @@
 package com.example.springecom.user.exception;
 
-public class UserPersistentException extends Exception {
+import java.sql.SQLException;
+
+public class UserPersistentException extends RuntimeException {
+
+
+    public UserPersistentException(String message, Exception exception) {
+        super(message, exception);
+    }
 }

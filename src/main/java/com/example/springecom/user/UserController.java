@@ -37,12 +37,12 @@ public class UserController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<String> updateUser(@RequestBody User user) {
+    public ResponseEntity<String> updateUser(@RequestBody User user, Model model) {
         try {
-            userService.updateUser(user);
+            userService.updateUserById(user);
             return new ResponseEntity<>("Successfully updated user", HttpStatus.ACCEPTED);
         }
-        catch (UserExistsException exception) {
+        catch (UserNotExistsException exception) {
             return new ResponseEntity<>("Cannot update user. User doesn't exists", HttpStatus.CONFLICT);
         }
     }
